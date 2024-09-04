@@ -1,17 +1,4 @@
-<div>
-  <label>Select number of items per page:</label>
-
-  <select
-    class="form-control"
-    (change)="onChange($event)"
-    [(ngModel)]="itemsPerPage"
-  >
-    <option *ngFor="let items of itemsPerPageOptions" [value]="items">
-      {{ items }}
-    </option>
-  </select>
-</div>
-<table class="table">
+<table class="table" style="margin-top: 3rem">
   <tr>
     <th>Employee ID</th>
     <th>Employee Name</th>
@@ -26,7 +13,39 @@
   </tr>
 </table>
 
-<button class="btn btn-primary" (click)="onPrevious()">Previous</button>
-<div class="help-block">Page {{ currentPage }} / {{ noOfPages }}</div>
+<div style="display: flex; justify-content: space-around">
+  <button
+    class="btn btn-primary"
+    style="display: inline-block"
+    (click)="onPrevious()"
+    [disabled]="currentPage === 1"
+  >
+    Previous
+  </button>
 
-<button class="btn btn-primary" (click)="onNext()">Next</button>
+  <div class="help-block" style="display: inline-block">
+    Page {{ currentPage }} / {{ noOfPages }}
+  </div>
+
+  <button
+    class="btn btn-success"
+    style="display: inline-block"
+    (click)="onNext()"
+    [disabled]="currentPage === noOfPages"
+  >
+    Next
+  </button>
+</div>
+
+<hr />
+<div
+  style="display: flex; justify-content: end; gap: 1.2rem; align-items: center"
+>
+  <label class="label">Select number of items per page: </label>
+
+  <select (change)="onChange($event)" [(ngModel)]="itemsPerPage">
+    <option *ngFor="let items of itemsPerPageOptions" [value]="items">
+      {{ items }}
+    </option>
+  </select>
+</div>

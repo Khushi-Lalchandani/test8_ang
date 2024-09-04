@@ -24,7 +24,7 @@ export class PaginationComponent implements OnInit {
     });
   }
   onChange(selectedValue: any) {
-    console.log(selectedValue.target.value);
+    this.currentPage = 1;
     this.itemsPerPage = selectedValue.target.value;
     this.noOfPages = Math.ceil(this.result.length / this.itemsPerPage);
   }
