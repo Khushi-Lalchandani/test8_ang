@@ -13,7 +13,64 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12">
-      <app-pagination></app-pagination>
+      <table class="table" style="margin-top: 3rem">
+        <tr>
+          <th>Employee ID</th>
+          <th>Employee Name</th>
+          <th>Employee Salary</th>
+          <th>Employee Age</th>
+        </tr>
+        <tr
+          *ngFor="let item of result | pagination : currentPage : itemsPerPage"
+        >
+          <td>{{ item.id }}</td>
+          <td>{{ item.employee_name }}</td>
+          <td>{{ item.employee_salary | salary }}</td>
+          <td>{{ item.employee_age }}</td>
+        </tr>
+      </table>
+
+      <div style="display: flex; justify-content: space-around">
+        <button
+          class="btn btn-primary"
+          style="display: inline-block"
+          (click)="onPrevious()"
+          [disabled]="currentPage === 1"
+        >
+          Previous
+        </button>
+
+        <div class="help-block" style="display: inline-block">
+          Page {{ currentPage }} / {{ noOfPages }}
+        </div>
+
+        <button
+          class="btn btn-success"
+          style="display: inline-block"
+          (click)="onNext()"
+          [disabled]="currentPage === noOfPages"
+        >
+          Next
+        </button>
+      </div>
+
+      <hr />
+      <div
+        style="
+          display: flex;
+          justify-content: end;
+          gap: 1.2rem;
+          align-items: center;
+        "
+      >
+        <label class="label">Select number of items per page: </label>
+
+        <select (change)="onChange($event)" [(ngModel)]="itemsPerPage">
+          <option *ngFor="let items of itemsPerPageOptions" [value]="items">
+            {{ items }}
+          </option>
+        </select>
+      </div>
     </div>
   </div>
 </div>
